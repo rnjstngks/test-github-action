@@ -1,1 +1,35 @@
-sd
+name: Example Workflow  # 워크플로 이름
+
+on:  # Event (워크플로를 트리거하는 조건)
+  push:
+    branches:
+      - main  # main 브랜치에 코드가 푸시될 때 실행
+
+jobs:  # Job (워크플로 내 작업 단위)
+  example-job:
+    runs-on: ubuntu-latest  # Runner (작업 실행 환경)
+
+    steps:  # Step (Job 내의 실행 단계)
+      - name: Checkout code  # Step 이름
+        uses: actions/checkout@v3  # Action 사용 (코드 체크아웃)
+
+      - name: Print Hello World
+        run: echo "Hello, World!"  # 커스텀 명령어 실행
+
+      - name: Set up Python  # Action 사용 (Python 설치)
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'  # 파라미터 전달
+
+      - name: Run a Python script
+        run: |
+          python -c "print('This is a Python script!')"
+
+      - name: Save output to a file
+        run: echo "Output saved!" > result.txt  # 파일 작성
+
+      - name: Upload artifact  # Action 사용 (결과 업로드)
+        uses: actions/upload-artifact@v3
+        with:
+          name: example-result  # 업로드 파일 이름
+          path: result.txt  # 업로드할 파일 경로

@@ -15,21 +15,3 @@ jobs:  # Job (워크플로 내 작업 단위)
 
       - name: Print Hello World
         run: echo "Hello, World!"  # 커스텀 명령어 실행
-
-      - name: Set up Python  # Action 사용 (Python 설치)
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.9'  # 파라미터 전달
-
-      - name: Run a Python script
-        run: |
-          python -c "print('This is a Python script!')"
-
-      - name: Save output to a file
-        run: echo "Output saved!" > result.txt  # 파일 작성
-
-      - name: Upload artifact  # Action 사용 (결과 업로드)
-        uses: actions/upload-artifact@v3
-        with:
-          name: example-result  # 업로드 파일 이름
-          path: result.txt  # 업로드할 파일 경로
